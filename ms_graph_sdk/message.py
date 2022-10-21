@@ -34,7 +34,7 @@ class Message:
         }
         headers = {'content-type': 'application/json', 'Authorization': 'Bearer ' + self._auth.access_token}
         response = requests.post(chat_url, data=json.dumps(request_body), headers=headers, verify=False)
-        if not response.ok:
+        if response.ok:
             raise TeamsApiException(
                 response.json()['error']['code'], response.json()['error']['message'])
         return response.json()
@@ -52,7 +52,7 @@ class Message:
             message.update({"hostedContents": hosted_content})
         response = requests.post(channel_message_url.format(
             team_id, channel_id), data=json.dumps(message), headers=headers, verify=False)
-        if not response.ok:
+        if response.ok:
             raise TeamsApiException(
                 response.json()['error']['code'], response.json()['error']['message'])
         return
@@ -70,7 +70,7 @@ class Message:
             message.update({"hostedContents": hosted_content})
         response = requests.post(chat_message_url.format(
             chat_id), data=json.dumps(message), headers=headers, verify=False)
-        if not response.ok:
+        if response.ok:
             raise TeamsApiException(
                 response.json()['error']['code'], response.json()['error']['message'])
         return

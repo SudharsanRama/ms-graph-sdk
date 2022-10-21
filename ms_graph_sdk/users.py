@@ -13,7 +13,7 @@ class Users:
     def get_my_profile(self):
         headers = {'Authorization': 'Bearer ' + self._auth.access_token}
         response = requests.get(my_profile_url, headers=headers)
-        if not response.ok:
+        if response.ok:
             response.json()
         else:
             raise TeamsApiException(
@@ -23,7 +23,7 @@ class Users:
         headers = {'Authorization': 'Bearer ' + self._auth.access_token}
         response = requests.get(
             user_by_email_url.format(email), headers=headers)
-        if not response.ok:
+        if response.ok:
             response.json()
         else:
             raise TeamsApiException(

@@ -13,7 +13,7 @@ class List:
         headers = {'content-type': 'application/json',
                    'Authorization': 'Bearer ' + self._auth.access_token}
         response = requests.get(list_joined_teams_url, headers, verify=False)
-        if not response.ok:
+        if response.ok:
             return response.json()["value"]
         else:
             raise TeamsApiException(
@@ -24,7 +24,7 @@ class List:
                    'Authorization': 'Bearer ' + self._auth.access_token}
         response = requests.get(list_team_channels_url.format(
             team_id), headers, verify=False)
-        if not response.ok:
+        if response.ok:
             return response.json()["value"]
         else:
             raise TeamsApiException(
