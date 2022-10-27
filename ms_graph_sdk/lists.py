@@ -12,7 +12,7 @@ class List:
     def list_joined_teams(self):
         headers = {'content-type': 'application/json',
                    'Authorization': 'Bearer ' + self._auth.access_token}
-        response = requests.get(list_joined_teams_url, headers, verify=False)
+        response = requests.get(list_joined_teams_url, headers=headers, verify=False)
         if response.ok:
             return response.json()["value"]
         else:
@@ -23,7 +23,7 @@ class List:
         headers = {'content-type': 'application/json',
                    'Authorization': 'Bearer ' + self._auth.access_token}
         response = requests.get(list_team_channels_url.format(
-            team_id), headers, verify=False)
+            team_id), headers=headers, verify=False)
         if response.ok:
             return response.json()["value"]
         else:
